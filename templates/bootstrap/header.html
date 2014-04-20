@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="{$LANGDEFS.$_ui_language.charset}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>::: LMS :{if $layout.pagetitle neq ""} {$layout.pagetitle|striphtml} :{/if}::</title>
+        <meta name="GENERATOR" content="LMS {$layout.lmsv}">
+
+        <!-- Bootstrap -->
+        <link href="img/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <link href="img/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <link href="img/bootstrap/css/theme.css" rel="stylesheet">
+        
+        <!-- page icon -->
+        <link href="img/lms-net.gif" rel="shortcut icon">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body onload="start_login_timeout({get_conf('phpui.timeout')})">
+        {if !$layout.popup}
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LMS @ {$layout.hostname}</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="navbar-form navbar-left" role="search" method="post" name="quicksearch" action="?m=quicksearch" id="quicksearch">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="{trans('Customers')}" id="customerinput" name="qscustomer" value="" data-toggle="tooltip" data-placement="bottom" title="{trans('Enter customer ID, first/lastname, email or address and press Enter')}">
+                            <input type="text" class="form-control" placeholder="{trans('Nodes')}" id="nodeinput" name="qsnode" value="" data-toggle="tooltip" data-placement="bottom" title="{trans('Enter node ID, name, IP address or MAC address and press Enter')}">
+                            <input type="text" class="form-control" placeholder="{trans('Tickets')}" id="rtinput" name="qsticket" value="" data-toggle="tooltip" data-placement="bottom" title="{trans('Enter request tracker ID, subject or requestor name and press Enter')}">
+                            <input type="text" class="form-control" placeholder="{trans('Accounts')}" id="accountinput" name="qsaccount" value="" data-toggle="tooltip" data-placement="bottom" title="{trans('Enter account or alias name and press Enter')}">
+                        </div>
+                    </form>
+                    <div class="navbar-form pull-right">
+                    <button type="button" 
+                            class="btn btn-primary" 
+                            data-toggle="tooltip" 
+                            data-placement="bottom" 
+                            title="{trans('Allows you to logout')}" 
+                            id="logout_button" >{trans('Logout')}</button>
+                    </div>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        {/if}
+        <div id="wrapper_panel" class="row">
+            {if !$layout.popup}
+            <nav id="navigation_panel" class="col-md-2">
+                <ul class="nav nav-pills nav-stacked navigation_menu" id="accordion">
+                {foreach from=$newmenu item=menuitem name=menu}
+                    <li class="active">
+                    {if !$menuitem.submenu}
+                        <a href="{$menuitem.link}" {if $menuitem.tip} data-toggle="tooltip" data-placement="right" title="{$menuitem.tip}"{/if}>{$menuitem.name}</a>
+                    {else}
+                        <a href="#{$menuitem.name|replace:' ':'-'}" data-toggle="collapse" data-parent="#accordion">{$menuitem.name}</a>
+                        <ul class="nav nav-pills nav-stacked collapse navigation_submenu" id="{$menuitem.name|replace:' ':'-'}">
+                        {foreach from=$menuitem.submenu item=submenuitem}
+                            <li>
+                                <a href="{$submenuitem.link}" {if $submenuitem.tip} data-toggle="tooltip" data-placement="right" title="{$submenuitem.tip}"{/if}>{$submenuitem.name}</a>
+                            </li>
+                        {/foreach}
+                        </ul>
+                    {/if}
+                    </li>
+                {/foreach}
+                </ul>
+            </nav>
+            {/if}
+            <div id="content_panel" class="{if !$layout.popup}col-md-10{else}col-md-12{/if}">

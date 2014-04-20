@@ -185,6 +185,7 @@ $_LANG['Balance Sheet'] = 'Historia operacji';
 $_LANG['Balance Sheet ($a to $b)'] = 'Historia operacji ($a do $b)';
 $_LANG['Balance Sheet of User: $a ($b to $c)'] = 'Historia operacji dla użytkownika: $a ($b do $c)';
 $_LANG['<B>Allows you to logout</B>'] = '<B>Zakończenie pracy</B>';
+$_LANG['Allows you to logout'] = 'Zakończenie pracy';
 $_LANG['Basic system information'] = 'Podstawowe informacje o systemie';
 $_LANG['Begin:'] = 'Początek:';
 $_LANG['Start map from:'] = 'Zacznij mapę od:';
