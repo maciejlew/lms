@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("About LMS:")}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="http://www.lms.org.pl" rel="external">{trans("LMS version:")}</a> 
+            {$layout.lmsv}{if $layout.lmsvr} ({$layout.lmsvr}){/if}
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.lms.org.pl" rel="external">{trans("LMSDB version:")}</a> 
+            {$layout.lmsdbv}
+        </li>
+        <li class="list-group-item">
+            {if $layout.dbtype == "mysql" || $layout.dbtype == "mysqli"}
+            <a href="http://www.mysql.com" rel="external">{trans("MySQL version:")}</a> 
+            {elseif $layout.dbtype == "postgres"}
+            <a href="http://www.postgresql.org" rel="external">{trans("PostgreSQL version:")}</a> 
+            {/if}
+            {$layout.dbversion}
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.php.net/" rel="external">{trans("PHP version:")}</a> 
+            {$sysinfo.phpversion}
+        </li>
+        <li class="list-group-item">
+            <a href="http://www.smarty.net" rel="external">{trans("Smarty version:")}</a> 
+            {$layout.smarty_version}
+        </li>
+    </ul>
+</div>

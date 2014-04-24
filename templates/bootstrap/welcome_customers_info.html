@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("Customers:")}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <A href="?m=customerlist&amp;s=3">{trans("Connected:")}</A> 
+            {$customerstats.connected}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=customerlist&amp;s=2">{trans("Waiting:")}</A> 
+            {$customerstats.awaiting}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=customerlist&amp;s=1">{trans("Interested:")}</A>
+            {$customerstats.interested}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=customerlist&amp;s=0">{trans("Total:")}</A>
+            {$customerstats.total}
+        </li>
+        {if !check_conf('privileges.hide_finances')}
+        <li class="list-group-item">
+            <A href="?m=customerlist&amp;s=6">{trans("Total Dues:")}</A>
+            {$customerstats.debt} ({trans("amount")} {$customerstats.debtvalue|money_format})
+        </li>
+        {/if}
+    </ul>
+</div>

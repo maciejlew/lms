@@ -1,0 +1,49 @@
+{if $rtstats}
+<div class="container-fluid">
+    <div class="row">
+        {foreach from=$rtstats item=rtcategorystats}
+        {if $rtstats|@count % 4 == 0}
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+        {elseif $rtstats|@count % 3 == 0}
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        {elseif $rtstats|@count % 2 == 0}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        {else}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {/if}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {trans("Helpdesk:")} <A href="?m=rtqueueview&amp;catid={$rtcategorystats.id}">{$rtcategorystats.name}</A>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <A href="?m=rtqueueview&catid={$rtcategorystats.id}&s=0&o=lastmodified,desc">{trans("New:")}</A> 
+                        {$rtcategorystats.new|default:"0"}
+                    </li>
+                    <li class="list-group-item">
+                        <A href="?m=rtqueueview&catid={$rtcategorystats.id}&s=1&o=lastmodified,desc">{trans("Opened:")}</A>
+                        {$rtcategorystats.opened|default:"0"}
+                    </li>
+                    <li class="list-group-item">
+                        <A href="?m=rtqueueview&catid={$rtcategorystats.id}&s=3&o=lastmodified,desc">{trans("Dead:")}</A>
+                        {$rtcategorystats.dead|default:"0"}
+                    </li>
+                    <li class="list-group-item">
+                        <A href="?m=rtqueueview&catid={$rtcategorystats.id}&s=-1&o=lastmodified,desc">{trans("Unresolved:")}</A>
+                        {$rtcategorystats.unresolved|default:"0"}
+                    </li>
+                    <li class="list-group-item">
+                        <A href="?m=rtqueueview&catid={$rtcategorystats.id}&s=2&o=lastmodified,desc">{trans("Resolved:")}</A>
+                        {$rtcategorystats.resolved|default:"0"}
+                    </li>
+                    <li class="list-group-item">
+                        <A href="?m=rtqueuelist">{trans("Total:")}</A>
+                        {math equation="a+b+c+d" a=$rtcategorystats.opened b=$rtcategorystats.new c=$rtcategorystats.dead d=$rtcategorystats.resolved}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</div>
+{/if}

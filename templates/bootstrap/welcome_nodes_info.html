@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("Nodes:")}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <A href="?m=nodelist&amp;s=3">{trans("Online:")}</A>
+            {$nodestats.online}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=nodelist&amp;s=1">{trans("Connected<!nodes>:")}</A>
+            {$nodestats.connected}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=nodelist&amp;s=2">{trans("Disconnected:")}</A>
+            {$nodestats.disconnected}
+        </li>
+        <li class="list-group-item">
+            <A href="?m=nodelist">{trans("Total:")}</A>
+            {$nodestats.total}
+        </li>
+    </ul>
+</div>

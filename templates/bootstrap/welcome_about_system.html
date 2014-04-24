@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("About system:")}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {trans("Hostname:")} 
+            {$sysinfo.hostname}
+        </li>
+        <li class="list-group-item">
+            {trans("System version:")}
+            {$sysinfo.kernel}
+        </li>
+        <li class="list-group-item">
+            {trans("Uptime:")} 
+            {$sysinfo.uptime}
+        </li>
+        <li class="list-group-item">
+            {trans("Users logged in:")} 
+            {$sysinfo.users}
+        </li>
+        <li class="list-group-item">
+            {trans("Load:")} 
+            {$sysinfo.loadavg.0} {$sysinfo.loadavg.1} {$sysinfo.loadavg.2}
+        </li>
+    </ul>
+</div>

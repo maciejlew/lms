@@ -1,0 +1,48 @@
+{include file="header.html"}
+<div class="page-header">
+    <h1>{$layout.pagetitle}</h1>
+</div>
+
+{if !check_conf('privileges.hide_sysinfo')}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="welcome_about_lms.html"}
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="welcome_about_system.html"}
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="welcome_customers_info.html"}
+        </div>
+        {if !check_conf('privileges.hide_summaries')}
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="welcome_nodes_info.html"}
+        </div>
+        {/if}
+    </div>
+</div>
+
+
+{include file="welcome_rtstats.html"}
+
+
+<div class="container-fluid">
+    <div class="row">
+        {if !check_conf('privileges.hide_links')}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            {include file="welcome_links.html"}
+        </div>
+        {/if}
+        {if check_conf('privileges.superuser')}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            {include file="welcome_registration_info.html"}
+        </div>
+        {/if}
+    </div>
+</div>
+
+{/if}
+
+{include file="footer.html"}

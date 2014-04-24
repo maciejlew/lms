@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("Registration info:")}
+    </div>
+    <ul class="list-group">
+        {if $regdata}
+        <li class="list-group-item">
+            {trans("Registration ID:")} {$regdata.id|string_format:"%04d"}
+        </li>
+        <li class="list-group-item">
+            {trans("Registered for:")} {$regdata.name}
+        </li>
+        <li class="list-group-item">
+            {trans("URL:")} {$regdata.url}
+        </li>
+        {else}
+        <li class="list-group-item">
+            {trans("Your installation is unregistered!")}
+        </li>
+        {/if}
+    </ul>
+    <div class="panel-footer">
+    {if $regdata}
+    <A href="?m=register">{trans("Change registration info")}</A>
+    {else}
+    <A href="?m=register">{trans("Click here, to register your installation and learn more why you should - IT'S FREE!")}</A>
+    {/if}
+    </div>
+</div>
