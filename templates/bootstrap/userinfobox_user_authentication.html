@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans('User authentication:')}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {trans("Login:")}
+            {$userinfo.login} ({$userinfo.id|string_format:"%04d"})
+        </li>
+        {if $userinfo.swekey_id}
+        <li class="list-group-item">
+            {trans("Swekey:")}
+            {$userinfo.swekey_id}
+        </li>
+        {/if}
+        <li class="list-group-item">
+            {trans("Account active:")}
+            {if !$userinfo.access}{trans("no")}{else}{trans("yes")}{/if}
+        </li>
+        {if $userinfo.accessfrom || $userinfo.accessto}
+        <li class="list-group-item">
+            {trans("Account active:")} 
+            {if $userinfo.accessfrom}{trans("from")}: {$userinfo.accessfrom}{/if}
+            {if $userinfo.accessto} {trans("to")}: {$userinfo.accessto}{/if}
+        </li>
+        {/if}
+        <li class="list-group-item">
+            {trans("Password expiration:")}
+            {$_PASSWDEXPIRATIONS[$userinfo.passwdexpiration]}
+        </li>
+        <li class="list-group-item">
+            {trans("Last password change:")}
+            {$userinfo.passwdlastchange}
+        </li>
+        <li class="list-group-item">
+            {trans("Last login:")}
+            {$userinfo.lastlogin}, {$userinfo.lastloginip} 
+            {if $userinfo.lastloginip neq $userinfo.lastloginhost}({$userinfo.lastloginhost}){/if}
+        </li>
+        <li class="list-group-item">
+            {trans("Last failed login:")}
+            {$userinfo.faillogin}, {$userinfo.failedloginip} 
+            {if $userinfo.failedloginip neq $userinfo.failedloginhost}({$userinfo.failedloginhost}){/if}
+        </li>
+    </ul>
+</div>

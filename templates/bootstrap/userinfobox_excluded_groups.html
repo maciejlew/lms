@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("Excluded groups:")}
+    </div>
+    <ul class="list-group">
+        {foreach from=$excludedgroups item=item}
+        <li class="list-group-item">
+            <a href="?m=customergroupinfo&id={$item.id}">{$item.name}</a>
+        </li>
+        {foreachelse}
+        <li class="list-group-item">
+            -   
+        </li>
+        {/foreach}
+    </ul>
+</div>

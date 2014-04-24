@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="userinfobox_base_user_informations.html"}
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="userinfobox_user_authentication.html"}
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="userinfobox_access_rights.html"}
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            {include file="userinfobox_excluded_groups.html"}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="btn-toolbar row" role="toolbar">
+        <div class="btn-group">
+            {if $layout.logid ne $userinfo.id}
+            {if !$userinfo.access}
+            <button type="button" class="btn btn-default" id="user_connect_button">
+                {trans("Connect")}
+            </button>
+            {else}
+            <button type="button" class="btn btn-default" id="user_disconnect_button">
+                {trans("Disconnect")}
+            </button>
+            {/if}
+            {/if}
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" id="user_edit_button">
+                {trans("Edit")}
+            </button>
+            <button type="button" class="btn btn-default" id="user_delete_button">
+                {trans("Delete")}
+            </button>
+            <button type="button" class="btn btn-default" id="user_change_password_button">
+                {trans("Change password")}
+            </button>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" id="users_list_button">
+                {trans("User list")}
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#user_connect_button').click(function() {
+        var target = "?m=useraccess&id={$userinfo.id}&access=1";
+        window.location.href = target;
+    });
+    $('#user_disconnect_button').click(function() {
+        var target = "?m=useraccess&id={$userinfo.id}&access=0";
+        window.location.href = target;
+    });
+    $('#user_edit_button').click(function() {
+        var target = "?m=useredit&id={$userinfo.id}";
+        window.location.href = target;
+    });
+    $('#user_delete_button').click(function() {
+        var confirm_header = '{trans("Delete")}';
+        var confirm_message = '{trans("Are you sure, you want to irreversibly delete that user account?")}';
+        var confirm_target = '?m=userdel&id={$userinfo.id}';
+
+        $('#confirm-modal-title').html(confirm_header);
+        $('#confirm-modal-message').html('<p>'+confirm_message+'</p>');
+        $('#confirm-modal-confirm-button').click(function(){
+            window.location.href = confirm_target;
+        });
+
+        $('#confirm-modal').modal('show');
+
+    });
+    $('#user_change_password_button').click(function() {
+        var target = "?m=userpasswd&id={$userinfo.id}";
+        window.location.href = target;
+    });
+    $('#users_list_button').click(function() {
+        var target = "?m=userlist";
+        window.location.href = target;
+    });
+</script>

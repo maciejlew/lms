@@ -92,3 +92,7 @@ body {
     background-color: #428bca;
     outline: 0;
 }
+
+.btn-group {
+    margin-bottom: 1em;
+}

@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans('Base user informations:')}
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            {trans("First/last name:")}
+            {$userinfo.name}
+        </li>
+        {if $userinfo.position}
+        <li class="list-group-item">
+            {trans("Position:")}
+            {$userinfo.position}
+        </li>
+        {/if}
+        {if $userinfo.email}
+        <li class="list-group-item">
+            {trans("E-mail:")}
+            <a href="mailto:{$userinfo.email}">{$userinfo.email}</a>
+        </li>
+        {/if}
+        {if $userinfo.phone}
+        <li class="list-group-item">
+            {trans("Phone:")}
+            {$userinfo.phone}
+        </li>
+        {/if}
+        <li class="list-group-item">
+            {trans("Notification:")}
+            {if !$userinfo.ntype}{trans("none")}{else}{$userinfo.ntype}{/if}
+        </li>
+        <li class="list-group-item">
+            {trans("Allowed hosts:")}
+            {if $userinfo.hosts}{$userinfo.hosts}{else}{trans("all")}{/if}
+        </li>
+    </ul>
+</div>

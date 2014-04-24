@@ -1,0 +1,62 @@
+{*$xajax*}
+<FORM name="search" method="post" action="?m=archiveview">
+<p style="display: none;">
+<INPUT type="submit" class="hiddenbtn">
+<INPUT type="hidden" name="search[resourcetype]" value="{$resourcetype}">
+<INPUT type="hidden" name="search[resourceid]" value="{$resourceid}">
+<INPUT type="hidden" name="search[userid]" value="{$userid}">
+</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-1 col-md-12 col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {trans("Transaction Log:")} ({t a=20}last $a transactions{/t}) <A href="javascript:document.search.submit();">{trans("More")} &raquo;</A>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>{trans("Date:")}</th>
+                                <th>{trans("User:")}</th>
+                                <th>{trans("Module:")}</th>
+                                <th>{trans("Operations:")}</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            
+                        </tfoot>
+                        <tbody>
+                        {foreach $transactions as $tr}
+                            <tr>
+                                <td>{$tr.time|date_format:"Y.m.d H.i.s"}</td>
+                                <td><a href="?m=userinfo&amp;id={$tr.userid}">{$tr.login}</a></td>
+                                <td>{$tr.module}</td>
+                                <td>
+                                    {if $tr.messages}
+                                        {if count($tr.messages) > 10}{$start = 9 - count($tr.messages)}...<br>
+                                        {else}{$start=-1}{/if}
+                                        {section name=messages loop=$tr.messages start=$start step=-1}
+                                            {$message = $tr.messages[messages]}
+                                            <span class="bold">{$_SYSLOG_RESOURCES[$message.resource]}: {$_SYSLOG_OPERATIONS[$message.operation]}</span>
+                                            {foreach $message.keys as $key => $msgkey}{$key}: {if $msgkey.value}<a href="?m=archiveinfo&amp;type={$msgkey.type}&amp;id={$msgkey.value}&amp;date={$tr.time}">{/if}{$msgkey.value}{if $msgkey.value}</a>{/if}{if !$msgkey@last}, {/if}{/foreach}
+                                            {foreach $message.data as $key => $value}{$key}: {$value}{if !$value@last}, {/if}{/foreach}
+                                            {if !$messages@last}<br>{/if}
+                                        {/section}
+                                    {/if}
+                                </td>
+                            </tr>
+                        {foreachelse}
+                            <tr>
+                                <td colspan="4">
+                                    {trans("No such transactions in database.")}
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

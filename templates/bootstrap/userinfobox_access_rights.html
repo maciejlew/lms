@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {trans("Access rights:")}
+    </div>
+    <ul class="list-group">
+        {section name=acl loop=$accesslist}
+        <li class="list-group-item">
+            {$accesslist[acl]}
+        </li>
+        {/section}
+    </ul>
+</div>
