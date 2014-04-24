@@ -1,0 +1,78 @@
+{include file="header.html"}
+<div class="page-header">
+    <h1>{$layout.pagetitle}</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">{$layout.pagetitle}</div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>{trans("Login:")}</th>
+                            <th>{trans("First/last name:")}</th>
+                            <th>{trans("Active from:")}</th>
+                            <th>{trans("Active to:")}</th>
+                            <th>{trans("Last login:")}</th>
+                            <th>{trans("Actions:")}</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th colspan="6">{trans("Total:")} {$userslist.total}</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    {foreach item=user from=$userslist}
+                    {if $user.id}
+                        <tr class="{if !$user.access}warning{/if}">
+                            <td onClick="return self.location.href='?m=userinfo&amp;id={$user.id}';">
+                                {$user.login}
+                            </td>
+                            <td onClick="return self.location.href='?m=userinfo&amp;id={$user.id}';">
+                                {$user.name}
+                            </td>
+                            <td onclick="return self.location.href='?m=userinfo&amp;id={$user.id}';">
+                                {$user.accessfrom}
+                            </td>
+                            <td onclick="return self.location.href='?m=userinfo&amp;id={$user.id}';">
+                                {$user.accessto}
+                            </td>
+                            <td onClick="return self.location.href='?m=userinfo&amp;id={$user.id}';">
+                                {$user.lastlogin}
+                                {$user.lastloginip}
+                                {if $user.lastloginip neq $user.lastloginhost}
+                                ({$user.lastloginhost})
+                                {/if}
+                            </td>
+                            <td>
+                                {if $layout.logid ne $user.id}
+                                {if !$user.access}
+                                <a href="?m=useraccess&amp;id={$user.id}&amp;access=1">[ {trans('Connect')} ]</a>
+                                {else}
+                                <a href="?m=useraccess&amp;id={$user.id}&amp;access=0">[ {trans('Disconnect')} ]</a>
+                                {/if}
+                                {/if}
+                                <a href="?m=userpasswd&amp;id={$user.id}">[ {trans("Change password")} ]</a>
+                                {if $user.id neq $layout.logid}
+                                <a href="?m=userdel&amp;id={$user.id}" onClick="return confirmLink(this, '{trans("Are you sure, you want to irreversibly delete that user account?")}');">[ {trans("Delete")} ]</a>
+                                {/if}
+                                <a href="?m=useredit&amp;id={$user.id}">[ {trans("Edit")} ]</a>
+                                <a href="?m=userinfo&amp;id={$user.id}">[ {trans("Info")} ]</a>
+                            </td>
+                        </tr>
+                    {/if}
+                    {/foreach}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{include file="footer.html"}
